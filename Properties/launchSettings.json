@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "TVHeadEndM3USync": {
+      "commandName": "Project",
+      "commandLineArgs": "http://192.168.200.71:9981/  \"c:\\temp\\t.m3u\" testy m3u m3u"
+    }
+  }
+}
