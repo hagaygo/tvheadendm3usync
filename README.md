@@ -68,7 +68,7 @@ If from some reason the TVH-UUID is gone missing or you delete the mux via tvhea
 
 To keep things simple , manage your IPTV urls only by editing your local m3u file and sync them using this tool.
 
-The tools requires 3 parameters :
+The tool requires 3 parameters :
 
 1.Tvheadend url - the url to your web gui with the correct port , should be something like http://tvheadendip:9981/.
 
@@ -79,5 +79,11 @@ The tools requires 3 parameters :
 4.username if needed by your tvheadend setup. (tested only with "both plain and digest" setting on tvheadend) 
 
 5.password if needed by your tvheadend setup.
+
+Run it in the following way :
+
+```
+dotnet TVHeadEndM3USync.dll <tvh url> <path to m3u file> <network name> <username> <password>
+```
 
 Have fun.
