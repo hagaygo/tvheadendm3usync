@@ -9,6 +9,12 @@ namespace TVHeadEndM3USync
     {
         static void Main(string[] args)
         {
+            if (args.Length == 1)
+            {
+                M3U.M3UCleaner.CleanupM3UFile(args[0]);
+                return;
+            }
+
             if (args.Length < 3)
             {
                 Console.WriteLine("Missing Parameters");
@@ -133,7 +139,7 @@ namespace TVHeadEndM3USync
                 else
                     Console.WriteLine("Finished deleting old muxes.");
             }
-        }
+        }        
 
         private static TVHeadEnd.Model.Network GetNetwork(string networkNameToSync, TVHClient cli)
         {

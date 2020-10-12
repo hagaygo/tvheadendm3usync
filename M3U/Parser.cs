@@ -9,7 +9,8 @@ namespace TVHeadEndM3USync.M3U
     class Parser
     {
         const string HEADER = "#EXTM3U";
-        const string TVH_UUID = "TVH-UUID=\"";
+        public const string TVH_UUID_KEY = "TVH-UUID";
+        public const string TVH_UUID = TVH_UUID_KEY + "=\"";
 
         public static List<Entry> GetEntries(string filePath)
         {
@@ -57,6 +58,21 @@ namespace TVHeadEndM3USync.M3U
             return null;
         }
 
+        internal static List<Tuple<string, string>> ParseTags(string tags)
+        {
+            var lst = new List<Tuple<string, string>>();
+            while (tags.Contains("="))
+            {
+                var key = tags.Substring(0, tags.IndexOf("="));
+                tags = tags.Remove(0, key.Length + 2); // extra one for "
+                var value = tags.Substring(0, tags.IndexOf("\""));
+                tags = tags.Remove(0, value.Length + 1).Trim();
+                lst.Add(new Tuple<string, string>(key, value));
+            }
+
+            return lst;
+        }
+
         internal static void WriteFile(string m3uFile, List<Entry> entries)
         {
             File.Copy(m3uFile, m3uFile + ".backup" + DateTime.Now.ToString("yyyyMMddHHmmss"));
@@ -68,7 +84,7 @@ namespace TVHeadEndM3USync.M3U
                 {
                     var idx = e.XTINF.LastIndexOf(",");
                     var x = e.XTINF;
-                    if (idx > 0)                    
+                    if (idx > 0)
                         x = x.Substring(0, idx);
 
                     if (!string.IsNullOrEmpty(e.TVH_UUID))
