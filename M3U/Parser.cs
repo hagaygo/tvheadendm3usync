@@ -31,7 +31,7 @@ namespace TVHeadEndM3USync.M3U
                         if (lastXTINF != null)
                     {
                         var e = new Entry();
-                        e.Url = line;
+                        e.Url = line.Trim();
                         e.XTINF = lastXTINF;
                         var idx = e.XTINF.LastIndexOf(",");
                         if (idx > 0)
